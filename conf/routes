@@ -1,0 +1,1 @@
+GET           /                                              @catchapp.mailer.controllers.misc.VersionController.version
