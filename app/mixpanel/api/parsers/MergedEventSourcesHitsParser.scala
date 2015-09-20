@@ -8,7 +8,6 @@ class MergedEventSourcesHitsParser(eventName: String) extends ResponseParser[Eve
 
   def parse(response: JsValue): Option[EventHitsBySources] = response \ "data" \ "values" match {
     case JsObject(sources) =>
-      Logger.logger.warn(response.toString())
       Some(EventHitsBySources(
         Event(eventName),
         sources.flatMap {
@@ -17,6 +16,7 @@ class MergedEventSourcesHitsParser(eventName: String) extends ResponseParser[Eve
           case _ => Seq.empty
         }.toMap
       ))
+    case _ => None
   }
 
   private def mergeHits(hits: JsObject): BigDecimal =
