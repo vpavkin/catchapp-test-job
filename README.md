@@ -11,8 +11,16 @@ mailer {
 }
 
 mandrill {
-  apiKey = "... api key here ..."
+  apiKey = "... mandrill api key here ..."
   templateName = "... mandrill template here ..."
+}
+
+mixpanel {
+  api-key = "... mixpanel api key here ..."
+  secret-key = "... mixpanel secret key here ..."
+
+  events = ["Open Story", "View Global"]
+  segment-by = "Source"
 }
 
 logger {
