@@ -1,6 +1,6 @@
 package mixpanel.api
 
-case class Interval(unit: Interval.Unit, amount: Int)
+case class Interval(amount: Int, unit: Interval.Unit)
 
 object Interval {
 

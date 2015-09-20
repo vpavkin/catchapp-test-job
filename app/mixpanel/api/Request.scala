@@ -29,4 +29,33 @@ object Request {
     )
   }
 
+  case class EventsProperties(event: String,
+                              propertyName: String,
+                              analysisType: AnalysisType,
+                              interval: Interval,
+                              propertyValues: Option[List[String]] = None,
+                              limit: Int = 255,
+                              expire: DateTime = DateTime.nextHour) extends Request {
+
+    def endpoint: Endpoint = Endpoint.EventsProperties
+    def params: List[(String, String)] = propertyValues.map("values" -> _.toJsonArrayString).toList ++ List(
+      "event" -> event,
+      "name" -> propertyName,
+      "type" -> analysisType.toString,
+      "unit" -> interval.unit.toString,
+      "interval" -> interval.amount.toString
+    )
+  }
+
+  case class EventsPropertiesValues(event: String,
+                                    propertyName: String,
+                                    limit: Int = 255,
+                                    expire: DateTime = DateTime.nextHour) extends Request {
+    def endpoint: Endpoint = Endpoint.EventsPropertiesValues
+    def params: List[(String, String)] = List(
+      "event" -> event,
+      "name" -> propertyName,
+      "limit" -> limit.toString
+    )
+  }
 }
